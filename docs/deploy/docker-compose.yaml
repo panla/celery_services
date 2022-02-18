@@ -1,0 +1,62 @@
+version: "3.9"
+services:
+  db:
+    image: mysql:8.0.26
+    container_name: fastapi_tm_db
+    volumes:
+      - ./data/mysql/data:/var/lib/mysql
+      - ./conf/mysql/my.cnf:/etc/my.cnf
+      - ./conf/mirrors/sources.list:/etc/apt/sources.list
+    networks:
+      fastapi_tm_net:
+        ipv4_address: 172.22.0.2
+    restart: always
+    environment:
+      - TZ=Asia/Shanghai
+      - LC_ALL=C.UTF-8
+      - LANG=C.UTF-8
+      - MYSQL_DATABASE=ftm_dev
+      - MYSQL_ROOT_PASSWORD=12345678
+
+  redis:
+    image: redis:6.2-alpine
+    container_name: fastapi_tm_redis
+    networks:
+      fastapi_tm_net:
+        ipv4_address: 172.22.0.3
+    restart: always
+    volumes:
+      - ./data/redis/data:/data
+    command: redis-server --requirepass 12345678
+    environment:
+      - TZ=Asia/Shanghai
+    depends_on:
+      - db
+
+  api:
+    container_name: fastapi_tm_api
+    image: "fastapi_tm_api:latest"
+    build:
+      context: "./api"
+      dockerfile: ./Dockerfile
+    command: /bin/bash ./docker-entrypoint.sh
+    volumes:
+      - ./api:/home/project
+      - ./conf/api/product.local.toml:/home/project/conf/product.local.toml
+      - ./conf/api/test.toml.local:/home/project/conf/test.local.toml
+      - ./conf/api/docker-entrypoint.sh:/home/project/docker-entrypoint.sh
+      - ./conf/api/gunicorn_config.py:/home/project/gunicorn_config.py
+      - ./logs/api:/home/logs
+    ports:
+      - 127.0.0.1:18020:8000
+    networks:
+      fastapi_tm_net:
+        ipv4_address: 172.22.0.4
+    restart: always
+    depends_on:
+      - redis
+      - db
+
+networks:
+  fastapi_tm_net:
+    external: true

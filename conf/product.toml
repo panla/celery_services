@@ -1,0 +1,16 @@
+[mq]
+HOST = "172.24.0.5"
+PORT = 5672
+USER = "root"
+PASSWD = "root"
+
+[redis]
+
+HOST = "172.22.0.3"
+PORT = 6379
+PASSWD = "12345678"
+
+[log]
+
+LEVEL = "INFO"
+PATH = "/home/logs/x.log"

@@ -1,0 +1,20 @@
+# hide dir
+.idea
+.vscode
+.svn
+
+# dir
+tmp
+logs
+venv
+
+__pycache__
+
+# file
+*.pyc
+*.sqlite3
+*.sqlite
+
+# file
+/docker-entrypoint.sh
+/conf/*.local.toml

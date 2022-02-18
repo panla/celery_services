@@ -1,0 +1,12 @@
+## webframework
+pydantic==1.9.0
+
+## toml file read
+pytomlpp==1.0.10
+
+## log
+loguru==0.5.3
+
+## celery
+celery==5.2.3
+redis==4.1.1
