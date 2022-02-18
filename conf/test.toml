@@ -6,7 +6,7 @@ PASSWD = "root"
 
 [redis]
 
-HOST = "172.22.0.3"
+HOST = "172.20.5.6"
 PORT = 6379
 PASSWD = "12345678"
 
