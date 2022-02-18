@@ -61,12 +61,9 @@ docker-compose up -d --build
 .
 ├── celery_services
 ├── conf
-│   ├── celery_services
-│   │   ├── product.local.toml
-│   │   ├── test.local.toml
-│   └── mysql
-│       ├── my.cnf
-│       └── sources.list
+│   └── celery_services
+│       ├── product.local.toml
+│       └── test.local.toml
 ├── data
 │   ├── rabbitmq
 │   │   └── mnesia
@@ -75,7 +72,7 @@ docker-compose up -d --build
 │           └── dump.rdb
 ├── docker-compose.yml
 ├── logs
-│   ├── celery
+│   ├── celery_services
 │   │   ├── x.log
 │   │   ├── x-test.log
 │   │   ├── x-local.log

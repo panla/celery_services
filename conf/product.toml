@@ -1,5 +1,5 @@
 [mq]
-HOST = "172.24.0.5"
+HOST = "172.20.5.5"
 PORT = 5672
 USER = "root"
 PASSWD = "root"
