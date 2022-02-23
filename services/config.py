@@ -1,4 +1,7 @@
+from datetime import timedelta
+
 from kombu import Queue, Exchange
+from celery.schedules import crontab
 
 from config import MQConfig, RedisConfig
 
@@ -61,10 +64,20 @@ class CeleryConfig:
 
     # 9，消息路由 使用 kombu.Queue
     task_queues = (
-        Queue(name=QueueNameConst.pay, exchange=define_exchange.get('pay'), routing_key=RoutingKeyConst.pay),
+        Queue(name=QueueNameConst.test, exchange=define_exchange.get('test'), routing_key=RoutingKeyConst.test),
+        Queue(name=QueueNameConst.pay, exchange=define_exchange.get('pay'), routing_key=RoutingKeyConst.pay)
     )
 
     # 10，路由列表把任务路由到队列的路由
     task_routes = {
-        'pay_task': {'exchange': define_exchange.get('pay').name, 'routing_key': RoutingKeyConst.pay}
+        'pay': {'exchange': define_exchange.get('pay').name, 'routing_key': RoutingKeyConst.pay}
+    }
+
+    beat_schedule = {
+        'timer_task': {
+            'task': 'services.timer_services.task.timer_task',
+            # 'schedule': crontab(minute='*/1'),
+            'schedule': timedelta(seconds=10),
+            'args': ()
+        }
     }
