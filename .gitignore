@@ -18,3 +18,4 @@ __pycache__
 # file
 /docker-entrypoint.sh
 /conf/*.local.toml
+/celerybeat-schedule.*
