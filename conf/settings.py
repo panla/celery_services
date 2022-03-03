@@ -24,3 +24,4 @@ class RedisSetting(BaseModel):
     PORT: Optional[int] = 6379
     PASSWD: Optional[str] = ''
     USER: Optional[str] = ''
+    MAX_CONNECTIONS: Optional[int] = 10000
