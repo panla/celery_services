@@ -1,3 +1,4 @@
+import threading
 from typing import Union
 from datetime import timedelta
 
@@ -15,19 +16,23 @@ REDIS_CONNECTION_PARAMS = {
     'encoding': 'utf-8',
     'decode_responses': True
 }
+
 REDIS_POOL_CACHE = dict()
 
 
-def make_pool(db: int = 0):
-    global REDIS_POOL_CACHE
+class Pool:
+    lock = threading.Lock()
 
-    pool = REDIS_POOL_CACHE.get(str(db))
-    if pool:
-        return pool
-    else:
-        pool = ConnectionPool(db=db, **REDIS_CONNECTION_PARAMS)
-        REDIS_POOL_CACHE[str(db)] = pool
-        return pool
+    @classmethod
+    def make_pool(cls, db: int = 0):
+        with cls.lock:
+            global REDIS_POOL_CACHE
+
+            if REDIS_POOL_CACHE.get(str(db)):
+                pass
+            else:
+                REDIS_POOL_CACHE[str(db)] = ConnectionPool(db=db, **REDIS_CONNECTION_PARAMS)
+            return REDIS_POOL_CACHE.get(str(db))
 
 
 class BaseRedis(object):
@@ -36,7 +41,8 @@ class BaseRedis(object):
 
     def __init__(self) -> None:
         self._name = None
-        self.client: Redis = Redis(connection_pool=make_pool(db=self.DB))
+
+        self.client: Redis = Redis(connection_pool=Pool.make_pool(db=self.DB))
 
     @property
     def name(self):
