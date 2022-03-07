@@ -54,7 +54,7 @@ class BaseRedis(object):
     def name(self):
         return self._name
 
-    @property
+    @name.setter
     def name(self, value):
         self._name = f'{self.PREFIX_KEY}:{value}'
 
