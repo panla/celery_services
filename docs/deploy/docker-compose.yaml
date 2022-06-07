@@ -4,13 +4,14 @@ services:
   rabbitmq:
     image: rabbitmq:3.8-management
     container_name: fastapi_tm_rabbitmq
+    restart: always
     hostname: fastapi_tm_rabbitmq
     networks:
       dev_net:
         ipv4_address: "172.20.5.5"
     volumes:
       - /etc/localtime:/etc/localtime:ro
-      - ./data/rabbitmq:/var/lib/rabbitmq
+      - ./data/fastapi_tm_rabbitmq:/var/lib/rabbitmq
     environment:
       - RABBITMQ_DEFAULT_USER=root
       - RABBITMQ_DEFAULT_PASS=root
@@ -18,31 +19,33 @@ services:
   redis:
     image: redis:6.2-alpine
     container_name: fastapi_tm_redis
+    command: ["redis-server", "/etc/redis/redis.conf"]
+    restart: always
     networks:
       dev_net:
         ipv4_address: "172.20.5.6"
-    command: redis-server --requirepass 12345678
     volumes:
       - /etc/localtime:/etc/localtime:ro
-      - ./data/redis/data:/data
+      - ./conf/fastapi_tm_redis/redis.conf:/etc/redis/redis.conf
+      # - ./conf/redis/tls:/tls
+      - ./data/fastapi_tm_redis/data:/data
 
-  celery_services:
-    image: "celery_services:latest"
-    container_name: celery_services
-    build:
-      context: "./celery_services"
-      dockerfile: ./Dockerfile
-    command: /bin/bash ./docker-entrypoint.sh
+  celery:
+    image: "fastapi_tm_celery:latest"
+    container_name: fastapi_tm_celery
+    build: "./fastapi_tm_celery"
+    command: ["/bin/bash", "./docker-entrypoint.sh"]
+    restart: always
     networks:
       dev_net:
-        ipv4_address: 172.20.5.11
+        ipv4_address: "172.20.5.11"
     volumes:
       - /etc/localtime:/etc/localtime:ro
-      - ./celery_services:/home/project
-      - ./conf/celery_services/product.local.toml:/home/project/conf/product.local.toml
-      - ./conf/celery_services/test.local.toml:/home/project/conf/test.local.toml
-      - ./conf/celery_services/docker-entrypoint.sh:/home/project/docker-entrypoint.sh
-      - ./logs/celery_services:/home/logs
+      - ./fastapi_tm_celery:/home/project
+      - ./conf/fastapi_tm_celery/product.local.toml:/home/project/conf/product.local.toml
+      - ./conf/fastapi_tm_celery/test.local.toml:/home/project/conf/test.local.toml
+      - ./conf/fastapi_tm_celery/docker-entrypoint.sh:/home/project/docker-entrypoint.sh
+      - ./logs/fastapi_tm_celery:/home/logs
     depends_on:
       - redis
       - rabbitmq

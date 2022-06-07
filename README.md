@@ -4,7 +4,7 @@
 
 ## keywords
 
-- ![python-3.8](https://img.shields.io/badge/python-3.8-yellowgreen)
+- ![python-3.9](https://img.shields.io/badge/python-3.9-yellowgreen)
 - [![pydantic](https://img.shields.io/badge/samuelcolvin-pydantic-green)](https://github.com/samuelcolvin/pydantic)
 - [![Redis](https://img.shields.io/badge/Redis-6.2-red)](https://redis.io/) ![MQTT](https://img.shields.io/badge/MQTT-V5-orange) [![Celery](https://img.shields.io/badge/Celery-V5-orange)](https://docs.celeryproject.org/en/stable/)
 
@@ -35,21 +35,21 @@
 docker network create --driver bridge --subnet xxxxxx --gateway xxxxxxxx xxxxxxxx
 
 # mkdir project dir
-mkdir /srv/project && cd /srv/project && mkdir conf/celery_services -p
+mkdir /srv/project && cd /srv/project && mkdir conf/fastapi_tm_celery -p
 
 # clone source code
-git clone this api
+git clone this project fastapi_tm_celery
 
 ## edit config settings
 # reference resources ./docs/deploy/docker-compose.yaml
 touch docker-compose.yaml
 
 # reference resources ./conf/product.toml ./conf/test.toml
-touch conf/celery_services/product.local.toml
-touch conf/celery_services/test.local.toml
+touch conf/fastapi_tm_celery/product.local.toml
+touch conf/fastapi_tm_celery/test.local.toml
 
 # reference resources ./docs/deploy/docker-entrypoint.sh
-touch conf/celery_services/docker-entrypoint.sh
+touch conf/fastapi_tm_celery/docker-entrypoint.sh
 
 # build and start
 docker-compose up -d --build
@@ -59,22 +59,22 @@ docker-compose up -d --build
 
 ```text
 .
-├── celery_services
+├── fastapi_tm_celery
 ├── conf
-│   └── celery_services
-│       ├── product.local.toml
-│       └── test.local.toml
+│   ├── fastapi_tm_celery
+│   │   ├── product.local.toml
+│   │   └── test.local.toml
+│   └── fastapi_tm_redis
+│       └── redis.conf
 ├── data
-│   ├── rabbitmq
+│   ├── fastapi_tm_rabbitmq
 │   │   └── mnesia
-│   └── redis
+│   └── fastapi_tm_redis
 │       └── data
 │           └── dump.rdb
-├── docker-compose.yml
-├── logs
-│   ├── celery_services
-│   │   ├── x.log
-│   │   ├── x-test.log
-│   │   ├── x-local.log
-│   │   ├── x-local-test.log
+├── docker-compose.yaml
+└── logs
+    └── fastapi_tm_celery
+        └── x.log
+
 ```
