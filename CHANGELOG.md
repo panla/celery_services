@@ -4,6 +4,19 @@
 
 ## 0.1
 
+### 0.1.2
+
+update/optimize
+
+add
+
+fix
+
+require packages
+
+- add requirements
+  - hiredis==2.0.0
+
 ### 0.1.1
 
 update/optimize
