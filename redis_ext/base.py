@@ -70,14 +70,36 @@ class BaseRedis(object):
     def get(self):
         return self.client.get(name=self.name)
 
-    def set(self, value, ex: Union[int, timedelta] = None, px: Union[int, timedelta] = None):
-        return self.client.set(name=self.name, value=value, ex=ex, px=px)
+    def set(
+            self,
+            value,
+            ex: Union[int, timedelta] = None,
+            px: Union[int, timedelta] = None,
+            nx: bool = False,
+            xx: bool = False,
+            get: bool = False
+    ):
+        """Set the value at key ``name`` to ``value``
+
+        ``ex`` sets an expired flag on key ``name`` for ``ex`` seconds.
+
+        ``px`` sets an expired flag on key ``name`` for ``px`` milliseconds.
+
+        ``nx`` if set to True, set the value at key ``name`` to ``value`` only
+            if it does not exist.
+
+        ``xx`` if set to True, set the value at key ``name`` to ``value`` only
+            if it already exists.
+
+        ``get`` if True, set the value at key ``name`` to ``value`` and return
+            the old value stored at key, or None if the key did not exist.
+            (Available since Redis 6.2)
+        """
+
+        return self.client.set(name=self.name, value=value, ex=ex, px=px, nx=nx, xx=xx, get=get)
 
     def set_nx(self, value):
         return self.client.setnx(name=self.name, value=value)
-
-    def get_set(self, value):
-        return self.client.getset(name=self.name, value=value)
 
     def hash_set(self, key: Optional[str] = None, value: Optional[str] = None, mapping: Optional[dict] = None):
         return self.client.hset(name=self.name, key=key, value=value, mapping=mapping)
