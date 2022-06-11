@@ -1,5 +1,5 @@
 import threading
-from typing import Union
+from typing import Union, Optional
 from datetime import timedelta
 
 from redis.client import Redis
@@ -58,6 +58,15 @@ class BaseRedis(object):
     def name(self, value):
         self._name = f'{self.PREFIX_KEY}:{value}'
 
+    def expire(self, seconds):
+        return self.client.expire(name=self.name, time=seconds)
+
+    def delete(self):
+        return self.client.delete(self.name)
+
+    def exists(self) -> bool:
+        return bool(self.client.exists(self.name))
+
     def get(self):
         return self.client.get(name=self.name)
 
@@ -67,29 +76,17 @@ class BaseRedis(object):
     def set_nx(self, value):
         return self.client.setnx(name=self.name, value=value)
 
-    def getset(self, value):
+    def get_set(self, value):
         return self.client.getset(name=self.name, value=value)
 
-    def set_kv(self, key, value):
-        return self.client.hset(name=self.name, key=key, value=value)
+    def hash_set(self, key: Optional[str] = None, value: Optional[str] = None, mapping: Optional[dict] = None):
+        return self.client.hset(name=self.name, key=key, value=value, mapping=mapping)
 
-    def get_kv(self, key):
+    def hash_get(self, key):
         return self.client.hget(name=self.name, key=key)
 
-    def set_mapping(self, mapping: dict):
-        return self.client.hmset(name=self.name, mapping=mapping)
-
-    def get_all_values(self):
+    def hash_get_all_values(self):
         return self.client.hgetall(name=self.name)
 
-    def get_values(self, keys):
+    def hash_get_values(self, keys):
         return self.client.hmget(name=self.name, keys=keys)
-
-    def expire(self, seconds):
-        return self.client.expire(name=self.name, time=seconds)
-
-    def delete(self):
-        return self.client.delete(self.name)
-
-    def exists(self) -> bool:
-        return bool(self.client.exists(self.name))

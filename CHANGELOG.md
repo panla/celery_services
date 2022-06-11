@@ -12,6 +12,8 @@ add
 
 fix
 
+- fix BaseRedis method
+
 require packages
 
 - add requirements
