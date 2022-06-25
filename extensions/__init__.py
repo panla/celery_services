@@ -1,2 +1,2 @@
 from .log import logger
-from .task import MyRequest, BaseTask
+from .task import BaseTask

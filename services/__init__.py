@@ -1,2 +1,2 @@
-from .pay_services.task import pay
-from .timer_services.task import timer_task
+from .pay.task import pay
+from .timer.task import timer_task
