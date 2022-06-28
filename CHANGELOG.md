@@ -8,6 +8,8 @@
 
 update/optimize
 
+- upgrade image from python:3.9-slim-buster to python:3.9-slim-bullseye
+
 add
 
 fix
