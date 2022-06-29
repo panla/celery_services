@@ -4,6 +4,22 @@
 
 ## 0.1
 
+### 0.1.3
+
+update/optimize
+
+- update logger add compression='tar.gz'
+
+add
+
+fix
+
+require packages
+
+- add requirements
+
+- upgrade requirements-dev
+
 ### 0.1.2
 
 update/optimize
