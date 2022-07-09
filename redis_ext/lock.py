@@ -19,10 +19,10 @@ class BaseLockRedis(BaseRedis):
 
         lock = self.set(value=current_value, ex=self.TIMEOUT, nx=True)
         if lock:
-            # it had exists
+            # origin is not exists now set it OK
             return True, str(current_value)
 
-        # it had not exists
+        # it had exists, get_old_value
         old_lock = self.get()
 
         if old_lock and current_time > float(old_lock):

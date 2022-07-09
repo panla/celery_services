@@ -8,9 +8,13 @@ from config import MQConfig, RedisConfig
 
 class CeleryConfig:
     # 1，任务队列 代理设置
+    # RabbitMQ 作为任务队列
     broker_url = f'amqp://{MQConfig.USER}:{MQConfig.PASSWD}@{MQConfig.HOST}:{MQConfig.PORT}'
+    # Redis 作为任务队列
+    # broker_url = f'redis://{RedisConfig.USER}:{RedisConfig.PASSWD}@{RedisConfig.HOST}:{RedisConfig.PORT}/1'
 
     # 2，结果存储 默认，无
+    # Redis 作为结果队列，Mongo
     result_backend = f'redis://{RedisConfig.USER}:{RedisConfig.PASSWD}@{RedisConfig.HOST}:{RedisConfig.PORT}/0'
 
     # 3，存储结果，过期时间为 一小时

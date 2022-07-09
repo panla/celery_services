@@ -1,7 +1,7 @@
 import time
 from datetime import datetime
 
-from extensions.log import logger
+from extensions import logger
 from services.application import app
 
 
