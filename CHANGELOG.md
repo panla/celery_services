@@ -7,6 +7,7 @@
 ### 0.1.3
 
 - update/optimize
+  - update BaseTask log
 
 - add
   - add comments
