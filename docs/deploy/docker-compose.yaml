@@ -2,7 +2,7 @@ version: "3.9"
 services:
 
   rabbitmq:
-    image: rabbitmq:3.8-management
+    image: rabbitmq:3.9-management
     container_name: fastapi_tm_rabbitmq
     restart: always
     hostname: fastapi_tm_rabbitmq

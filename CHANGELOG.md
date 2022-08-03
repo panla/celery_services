@@ -4,6 +4,22 @@
 
 ## 0.1
 
+### 0.1.4
+
+- update/optimize
+
+- add
+
+- fix
+
+- requirements
+
+- dev requirements
+
+- deploy
+  - upgrade rabbitmq from 3.8-management to 3.9-management
+  - update Dockerfile remove install gcc
+
 ### 0.1.3
 
 - update/optimize
