@@ -7,6 +7,7 @@
 ### 0.1.4
 
 - update/optimize
+  - update log config
 
 - add
 

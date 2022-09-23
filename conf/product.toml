@@ -1,4 +1,13 @@
+[log]
+
+LEVEL = "INFO"
+PATH = "/home/logs/x.log"
+STDOUT = true
+ROTATION = "00:00"
+RETENTION = "30 days"
+
 [mq]
+
 HOST = "172.20.5.5"
 PORT = 5672
 USER = "root"
@@ -9,8 +18,3 @@ PASSWD = "root"
 HOST = "172.20.5.6"
 PORT = 6379
 PASSWD = "12345678"
-
-[log]
-
-LEVEL = "INFO"
-PATH = "/home/logs/x.log"
