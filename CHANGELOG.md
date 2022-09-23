@@ -13,6 +13,8 @@
 - fix
 
 - requirements
+  - upgrade pydantic from 1.9.1 to 1.10.2
+  - upgrade redis from 4.3.3 to 4.3.4
 
 - dev requirements
 
