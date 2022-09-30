@@ -2,6 +2,23 @@
 
 [toc]
 
+## 0.2
+
+### 0.2.0
+
+- update/optimize
+
+- add
+
+- fix
+  - fix periodic task usages
+
+- requirements
+
+- dev requirements
+
+- deploy
+
 ## 0.1
 
 ### 0.1.4

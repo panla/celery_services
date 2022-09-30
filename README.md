@@ -13,6 +13,18 @@
 - [require packets for work](./mirrors/requirements.txt)
 - [require packets for dev and test](./mirrors/requirements-dev.txt)
 
+## command
+
+```bash
+# run beat task
+celery -A server:beat_app beat -l INFO
+# open another shell
+celery -A server:beat_app worker -l INFO -C 2/4/8
+
+# run commonly task
+celery -A server:app worker -l INFO -c 2/4/8
+```
+
 ## dir and file
 
 ### project file
