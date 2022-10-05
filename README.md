@@ -2,11 +2,17 @@
 
 > A demo that use the celery
 
+- [![GitHub version](https://badge.fury.io/gh/panla%2Ffastapi_tm_celery.svg)](https://badge.fury.io/gh/panla%2Ffastapi_tm_celery)
+- [![MIT licensed](https://img.shields.io/github/license/panla/fastapi_tm_celery)](https://raw.githubusercontent.com/panla/fastapi_tm_celery/master/LICENSE)
+- [![Github Repo](https://img.shields.io/badge/fastapi_tm_celery-github-red)](https://github.com/panla/fastapi_tm_celery) [![Gitee Repo](https://img.shields.io/badge/fastapi_tm_celery-gitee-red)](https://gitee.com/pankla/fastapi_tm_celery)
+
 ## keywords
 
-- ![python-3.9](https://img.shields.io/badge/python-3.9-yellowgreen)
+- ![python-3.9](https://img.shields.io/badge/Python-3.9-yellowgreen)
 - [![pydantic](https://img.shields.io/badge/samuelcolvin-pydantic-green)](https://github.com/samuelcolvin/pydantic)
-- [![Redis](https://img.shields.io/badge/Redis-6.2-red)](https://redis.io/) ![MQTT](https://img.shields.io/badge/MQTT-V5-orange) [![Celery](https://img.shields.io/badge/Celery-V5-orange)](https://docs.celeryproject.org/en/stable/)
+- [![Redis](https://img.shields.io/badge/Redis-6.2-red)](https://redis.io/)
+- [![Celery](https://img.shields.io/badge/Celery-V5-orange)](https://docs.celeryproject.org/en/stable/)
+- [Celery Periodic Task](https://docs.celeryq.dev/en/stable/userguide/periodic-tasks.html)
 
 ## environment
 

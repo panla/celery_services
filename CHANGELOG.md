@@ -4,6 +4,22 @@
 
 ## 0.2
 
+### 0.2.1
+
+- update/optimize
+  - update README
+
+- add
+
+- fix
+  - fix periodic task usages
+
+- requirements
+
+- dev requirements
+
+- deploy
+
 ### 0.2.0
 
 - update/optimize
