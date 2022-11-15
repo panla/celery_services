@@ -1,12 +1,10 @@
-from loguru import logger
-from extensions.task import BaseTask
+from extensions import logger, BaseTask
 from services.application import app
+from .logics.pay import PayOperator
 
 
 @app.task(bind=True, base=BaseTask, name='pay')
 def pay(self, payload: dict):
     """Pay Task"""
 
-    logger.info('Get One Task')
-    # logger.info(type(self.request))
-    # celery.app.task.Context
+    PayOperator(payload).pay()

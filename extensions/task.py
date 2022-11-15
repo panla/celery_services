@@ -20,10 +20,7 @@ class BaseTask(Task, ABC):
         """
 
         logger.debug(f'{task_id} start before_start'.center(60, '*'))
-        if args:
-            logger.info(f'task_id: {task_id}, args: {args}')
-        if kwargs:
-            logger.info(f'task_id: {task_id}, kwargs: {kwargs}')
+        logger.info(f'task_id: {task_id}, args: {args}, kwargs: {kwargs}')
         logger.debug(f'{task_id} end before_start'.center(60, '*'))
 
     def on_success(self, retval, task_id, args, kwargs):
@@ -62,10 +59,7 @@ class BaseTask(Task, ABC):
         """
 
         logger.debug(f'{task_id} start on_failure'.center(60, '*'))
-        if exc:
-            logger.error(f'task_id: {task_id}, exc: {exc}')
-        if einfo:
-            logger.error(f'task_id: {task_id}, einfo: {einfo}')
+        logger.error(f'task_id: {task_id}, exc: {exc}, einfo: {einfo}')
         logger.debug(f'{task_id} end on_failure'.center(60, '*'))
 
     def after_return(self, status, retval, task_id, args, kwargs, einfo):
@@ -84,11 +78,7 @@ class BaseTask(Task, ABC):
         """
 
         logger.debug(f'{task_id} start after_return'.center(60, '*'))
-
-        if status:
-            logger.info(f'task_id: {task_id}, status: {status}')
-        if retval:
-            logger.info(f'task_id: {task_id}, retval: {retval}')
+        logger.info(f'task_id: {task_id}, status: {status}, retval: {retval}')
         logger.debug(f'{task_id} end after_return'.center(60, '*'))
 
     def on_retry(self, exc, task_id, args, kwargs, einfo):
@@ -108,8 +98,5 @@ class BaseTask(Task, ABC):
         """
 
         logger.debug(f'{task_id} start on_retry'.center(60, '*'))
-        if exc:
-            logger.warning(f'task_id: {task_id}, exc: {exc}')
-        if einfo:
-            logger.warning(f'task_id: {task_id}, einfo: {einfo}')
+        logger.warning(f'task_id: {task_id}, exc: {exc}, einfo: {einfo}')
         logger.debug(f'{task_id} end on_retry'.center(60, '*'))

@@ -33,7 +33,7 @@ DefineExchange = {
 }
 
 
-class BeatConfig:
+class BaseConfig:
     ###################################################################################################################
     # 1，任务队列 代理设置
     # RabbitMQ 作为任务队列
@@ -73,8 +73,11 @@ class BeatConfig:
     task_default_routing_key = RoutingKey.default
 
 
-class CeleryConfig(BeatConfig):
+class BeatConfig(BaseConfig):
     pass
+
+
+class CeleryConfig(BaseConfig):
 
     # 9，消息路由 使用 kombu.Queue
     task_queues = (

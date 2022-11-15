@@ -6,8 +6,6 @@ VOLUME ["/home/project", "/home/logs"]
 
 WORKDIR /home/project
 
-EXPOSE 8000
-
 COPY ./mirrors /mirrors
 
 RUN cp /mirrors/sources.list /etc/apt/sources.list \ 

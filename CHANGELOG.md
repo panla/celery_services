@@ -8,6 +8,8 @@
 
 - update/optimize
   - update README
+  - update project struct
+  - update BaseTask
 
 - add
 

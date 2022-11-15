@@ -7,8 +7,8 @@ from loguru import logger
 
 from config import LogConfig
 
-level = LogConfig.LEVEL.upper()
 Path(LogConfig.PATH).parent.mkdir(exist_ok=True)
+level = LogConfig.LEVEL.upper()
 
 logger.remove()
 logger.add(
