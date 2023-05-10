@@ -6,6 +6,7 @@ from redis.client import Redis
 from redis.connection import ConnectionPool
 
 from config import RedisConfig
+from common import singleton
 
 REDIS_CONNECTION_PARAMS = {
     'max_connections': RedisConfig.MAX_CONNECTIONS,
@@ -18,28 +19,13 @@ REDIS_CONNECTION_PARAMS = {
 }
 
 
+@singleton
 class Pool:
-    cache = dict()
-    lock = threading.Lock()
-    instance = None
-
     def __init__(self, db: int = 0) -> None:
-        self.db = db
-
-    def __new__(cls, db: int = 0):
-        db = str(db)
-
-        with cls.lock:
-            if not cls.instance:
-                cls.instance = super().__new__(cls)
-
-            if not cls.cache.get(db):
-                cls.cache[db] = ConnectionPool(db=db, **REDIS_CONNECTION_PARAMS)
-
-            return cls.instance
+        self.db = ConnectionPool(db=db, **REDIS_CONNECTION_PARAMS)
 
     def pool(self):
-        return self.cache.get(str(self.db))
+        return self.db
 
 
 class BaseRedis(object):
